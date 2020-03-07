@@ -2,6 +2,7 @@
 
 
 ## Error reading input/Permission Denied:
+[Source](https://www.reddit.com/r/VFIO/comments/cx5gos/permission_denied_when_trying_to_use_my_mouse_in/)
 
 Edit ```/etc/libvirt/qemu.conf```:
 ```
@@ -27,6 +28,7 @@ cgroup_device_acl = [
 `systemctl restart libvirtd`
 
 ## VM not booting, just displaying booloader info
+[Source](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#AMD_Ryzen_/_BIOS_updates_(AGESA)_yields_%22Error:_internal_error:_Unknown_PCI_header_type_%E2%80%98127%E2%80%99%22)
 
 `echo 1 > /sys/module/kvm/parameters/ignore_msrs`
 
