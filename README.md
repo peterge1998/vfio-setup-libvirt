@@ -25,3 +25,12 @@ cgroup_device_acl = [
 `usermod -a -G input $USERNAME`
 
 `systemctl restart libvirtd`
+
+## VM not booting, just displaying booloader info
+
+`echo 1 > /sys/module/kvm/parameters/ignore_msrs`
+
+To make it permanently you can create a modprobe file `kvm.conf`:
+
+`options kvm ignore_msrs=1`
+
