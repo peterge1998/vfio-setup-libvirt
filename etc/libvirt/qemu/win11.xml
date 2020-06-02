@@ -1,0 +1,150 @@
+<!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh edit win11
+or other application using the libvirt API.
+-->
+
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <name>win11</name>
+  <uuid>e36b25d9-e6f5-4eb1-bdd7-0cb7ba61f58d</uuid>
+  <metadata>
+    <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
+      <libosinfo:os id="http://microsoft.com/win/10"/>
+    </libosinfo:libosinfo>
+  </metadata>
+  <memory unit='KiB'>8388608</memory>
+  <currentMemory unit='KiB'>8388608</currentMemory>
+  <vcpu placement='static'>10</vcpu>
+  <cputune>
+    <vcpupin vcpu='0' cpuset='2'/>
+    <vcpupin vcpu='1' cpuset='3'/>
+    <vcpupin vcpu='2' cpuset='4'/>
+    <vcpupin vcpu='3' cpuset='5'/>
+    <vcpupin vcpu='4' cpuset='6'/>
+    <vcpupin vcpu='5' cpuset='7'/>
+    <vcpupin vcpu='6' cpuset='8'/>
+    <vcpupin vcpu='7' cpuset='9'/>
+    <vcpupin vcpu='8' cpuset='10'/>
+    <vcpupin vcpu='9' cpuset='11'/>
+    <emulatorpin cpuset='0-1'/>
+  </cputune>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-4.0'>hvm</type>
+    <loader type='rom'>/usr/share/ovmf/x64/OVMF_CODE.fd</loader>
+    <bootmenu enable='no'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv>
+      <relaxed state='on'/>
+      <vapic state='on'/>
+      <spinlocks state='on' retries='8191'/>
+      <vendor_id state='on' value='123456789ab'/>
+    </hyperv>
+    <kvm>
+      <hidden state='on'/>
+    </kvm>
+    <vmport state='off'/>
+  </features>
+  <cpu mode='host-passthrough' check='none'>
+    <topology sockets='1' dies='1' cores='5' threads='2'/>
+    <feature policy='require' name='topoext'/>
+  </cpu>
+  <clock offset='localtime'>
+    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='pit' tickpolicy='delay'/>
+    <timer name='hpet' present='no'/>
+    <timer name='hypervclock' present='yes'/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type='block' device='disk'>
+      <driver name='qemu' type='raw' cache='none' io='native'/>
+      <source dev='/dev/disk/by-id/ata-ST1000DM003-1ER162_Z4Y4M1BL-part2'/>
+      <target dev='sdb' bus='sata'/>
+      <address type='drive' controller='0' bus='0' target='0' unit='4'/>
+    </disk>
+    <disk type='block' device='disk'>
+      <driver name='qemu' type='raw' cache='none' io='native'/>
+      <source dev='/dev/disk/by-id/wwn-0x5000c50050123e91'/>
+      <target dev='sdc' bus='sata'/>
+      <address type='drive' controller='0' bus='0' target='0' unit='3'/>
+    </disk>
+    <disk type='block' device='disk'>
+      <driver name='qemu' type='raw' cache='none' io='native'/>
+      <source dev='/dev/disk/by-id/ata-Intenso_SSD_Sata_III_128GF0708200405'/>
+      <target dev='sdd' bus='sata'/>
+      <boot order='1'/>
+      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+    </disk>
+    <controller type='usb' index='0' model='qemu-xhci' ports='15'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+    </controller>
+    <controller type='pci' index='0' model='pci-root'/>
+    <controller type='sata' index='0'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+    </controller>
+    <controller type='virtio-serial' index='0'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
+    </controller>
+    <interface type='direct'>
+      <mac address='52:54:00:37:15:27'/>
+      <source dev='eno1' mode='bridge'/>
+      <model type='e1000'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </interface>
+    <input type='mouse' bus='virtio'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x0a' function='0x0'/>
+    </input>
+    <input type='keyboard' bus='virtio'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x0b' function='0x0'/>
+    </input>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <sound model='ich6'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    </sound>
+    <hostdev mode='subsystem' type='pci' managed='yes'>
+      <source>
+        <address domain='0x0000' bus='0x1d' slot='0x00' function='0x0'/>
+      </source>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+    </hostdev>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='2'/>
+    </redirdev>
+    <redirdev bus='usb' type='spicevmc'>
+      <address type='usb' bus='0' port='3'/>
+    </redirdev>
+    <memballoon model='virtio'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
+    </memballoon>
+    <shmem name='looking-glass'>
+      <model type='ivshmem-plain'/>
+      <size unit='M'>32</size>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+    </shmem>
+    <shmem name='scream-ivshmem'>
+      <model type='ivshmem-plain'/>
+      <size unit='M'>2</size>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x11' function='0x0'/>
+    </shmem>
+  </devices>
+  <qemu:commandline>
+    <qemu:arg value='-object'/>
+    <qemu:arg value='input-linux,id=mouse1,evdev=/dev/input/by-id/usb-Logitech_Gaming_Mouse_G502_0E8736563037-event-mouse'/>
+    <qemu:arg value='-object'/>
+    <qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/by-id/usb-HyperX_Alloy_Elite_RGB_HyperX_Alloy_Elite_RGB-if01-event-kbd,grab_all=on,repeat=on'/>
+    <qemu:env name='QEMU_AUDIO_DRV' value='pa'/>
+    <qemu:env name='QEMU_PA_SERVER' value='/run/user/1000/pulse/native'/>
+  </qemu:commandline>
+</domain>
