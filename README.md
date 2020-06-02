@@ -33,6 +33,11 @@ wget https://raw.githubusercontent.com/peterge1998/vfio-setup-libvirt/master/etc
 sudo virsh define ./win11.xml
 ```
 
+```
+sudo vim /etc/modprobe.d/kvm.conf
+options kvm ignore_msrs=1
+```
+
 ## Error reading input/Permission Denied:
 [Source](https://www.reddit.com/r/VFIO/comments/cx5gos/permission_denied_when_trying_to_use_my_mouse_in/)
 
