@@ -1,18 +1,28 @@
 # vfio-setup-libvirt-xml
 
+```
 /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="amd_iommu=on iommu=pt ..."
+```
+(Check with ```dmesg | grep -i -e DMAR -e IOMMU``` after reboot)
 
+```
 /boot/loader/entries/arch.conf
 options ... amd_iommu=on iommu=pt
-
+```
+```
 /etc/modprobe.d/vfio.conf
 options vfio-pci ids=10de:1b80,10de:10f0
-
+```
+```
 /etc/mkinitcpio.conf
 MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
-
+```
+```
 mkinitcpio -p linux
+reboot
+```
+(Check with ```dmesg | grep -i vfio``` after reboot)
 
 ## Error reading input/Permission Denied:
 [Source](https://www.reddit.com/r/VFIO/comments/cx5gos/permission_denied_when_trying_to_use_my_mouse_in/)
