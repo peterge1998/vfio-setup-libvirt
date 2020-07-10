@@ -15,20 +15,7 @@ or other application using the libvirt API.
   </metadata>
   <memory unit='KiB'>8388608</memory>
   <currentMemory unit='KiB'>8388608</currentMemory>
-  <vcpu placement='static'>10</vcpu>
-  <cputune>
-    <vcpupin vcpu='0' cpuset='2'/>
-    <vcpupin vcpu='1' cpuset='3'/>
-    <vcpupin vcpu='2' cpuset='4'/>
-    <vcpupin vcpu='3' cpuset='5'/>
-    <vcpupin vcpu='4' cpuset='6'/>
-    <vcpupin vcpu='5' cpuset='7'/>
-    <vcpupin vcpu='6' cpuset='8'/>
-    <vcpupin vcpu='7' cpuset='9'/>
-    <vcpupin vcpu='8' cpuset='10'/>
-    <vcpupin vcpu='9' cpuset='11'/>
-    <emulatorpin cpuset='0-1'/>
-  </cputune>
+  <vcpu placement='static'>14</vcpu>
   <os>
     <type arch='x86_64' machine='pc-i440fx-4.0'>hvm</type>
     <loader type='rom'>/usr/share/ovmf/x64/OVMF_CODE.fd</loader>
@@ -48,8 +35,9 @@ or other application using the libvirt API.
     </kvm>
     <vmport state='off'/>
   </features>
-  <cpu mode='host-passthrough' check='none'>
-    <topology sockets='1' cores='5' threads='2'/>
+  <cpu mode='custom' match='exact' check='none'>
+    <model fallback='allow'>EPYC</model>
+    <topology sockets='1' dies='1' cores='7' threads='2'/>
     <feature policy='require' name='topoext'/>
   </cpu>
   <clock offset='localtime'>
@@ -62,8 +50,8 @@ or other application using the libvirt API.
   <on_reboot>restart</on_reboot>
   <on_crash>destroy</on_crash>
   <pm>
-    <suspend-to-mem enabled='no'/>
-    <suspend-to-disk enabled='no'/>
+    <suspend-to-mem enabled='yes'/>
+    <suspend-to-disk enabled='yes'/>
   </pm>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
@@ -115,7 +103,7 @@ or other application using the libvirt API.
     </sound>
     <hostdev mode='subsystem' type='pci' managed='yes'>
       <source>
-        <address domain='0x0000' bus='0x1d' slot='0x00' function='0x0'/>
+        <address domain='0x0000' bus='0x2a' slot='0x00' function='0x0'/>
       </source>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
     </hostdev>
